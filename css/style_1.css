@@ -1,0 +1,195 @@
+.navbar-inverse{
+	border-radius: 0px;
+}
+
+.panel{
+	border-radius: 0px;
+}
+
+.btn{
+	border-radius: 0px;
+}
+
+.well{
+	border-radius: 0px;
+}
+
+.panel-heading{
+	border-radius: 0px;
+}
+
+.navbar-inverse .active{
+	font-weight: 700;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	color: #95958C;
+}
+
+.navbar-inverse .navbar-brand{
+	color: #FFF;
+	font-weight: bold;
+	font-size: 22px
+}
+
+.form-control {
+    border-radius: 0px;
+}
+
+.semi-bold{
+	font-weight: 700;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.cPointer{
+	cursor: pointer;
+}
+
+.m-t-25 {
+    margin-top: 25px;
+}
+
+.m-b-5 {
+  margin-bottom: 5px;
+}
+
+.m-t-5 {
+  margin-top: 5px;
+}
+
+.bg-cinza{
+  background: #e2e4e6;
+}
+
+.quadro{
+  border: 1px solid #c2c2c2;
+  padding: 5px;
+  min-height: 60px;
+  cursor: pointer;
+  clear: both;
+  display: block;
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-decoration: none;
+  word-wrap: break-word;
+  color: #4d4d4d;
+  background-color: #fff;
+  border-radius: 3px;
+  margin-bottom: 6px;
+  position: relative;
+  text-decoration: none;
+  z-index: 0;
+}
+
+.quadro .handle {
+  margin-top:15px;
+}
+
+ul li { display: inline; }
+
+/* DRAG AND DROP */
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+ .typesDemo ul[dnd-list],
+ .typesDemo ul[dnd-list] > li {
+   position: relative;
+ }
+ 
+ /**
+  * The dnd-list should always have a min-height,
+  * otherwise you can't drop to it once it's empty
+  */
+ .typesDemo ul[dnd-list] {
+   min-height: 42px;
+   padding-left: 0px;
+ }
+ 
+ /**
+  * The dndDraggingSource class will be applied to
+  * the source element of a drag operation. It makes
+  * sense to hide it to give the user the feeling
+  * that he's actually moving it.
+  */
+ .typesDemo ul[dnd-list] .dndDraggingSource {
+   display: none;
+ }
+ 
+ /**
+  * An element with .dndPlaceholder class will be
+  * added to the dnd-list while the user is dragging
+  * over it.
+  */
+ .typesDemo ul[dnd-list] .dndPlaceholder {
+   display: block;
+   background-color: #ddd;
+   padding: 10px 15px;
+   min-height: 42px;
+ }
+ 
+ /**
+  * The dnd-lists's child elements currently MUST have
+  * position: relative. Otherwise we can not determine
+  * whether the mouse pointer is in the upper or lower
+  * half of the element we are dragging over. In other
+  * browsers we can use event.offsetY for this.
+  */
+ .typesDemo ul[dnd-list] li {
+   background-color: #fff;
+   border: 1px solid #ddd;
+   border-top-right-radius: 4px;
+   border-top-left-radius: 4px;
+   display: block;
+   margin-bottom: -1px;
+ 
+   /* Disable text selection if item is not draggable */
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -khtml-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+ }
+ 
+ .typesDemo ul[dnd-list] li dnd-nodrag {
+   display: block;
+   padding: 10px 15px;
+ }
+ 
+ /**
+  * Gender-specifc background
+  */
+ .typesDemo ul[dnd-list] li.background-man {
+   background-color: #CAE0FC;
+ }
+ 
+ .typesDemo ul[dnd-list] li.background-woman {
+   background-color: #FFE2F5;
+ }
+ 
+ .typesDemo ul[dnd-list] input.background-man {
+   background-color: #D8E9FF;
+   color: #2F4D99;
+ }
+ 
+ .typesDemo ul[dnd-list] input.background-woman {
+   background-color: #FFF0FA;
+   color: #D84FA7;
+ }
+ 
+ /**
+  * Handle positioning
+  */
+ .typesDemo .handle {
+   cursor: move;
+   position: absolute;
+   top: 14px;
+ }
+ 
+ .typesDemo .name {
+   margin-left: 20px;
+ }
