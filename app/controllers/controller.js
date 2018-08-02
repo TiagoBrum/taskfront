@@ -14,11 +14,6 @@
                     tarefas: []
                 };
         
-            // Model to JSON for demo purpose
-            self.$watch('modelTarefas', function(modelTarefas) {
-                self.modelAsJson = angular.toJson(modelTarefas, true);
-            }, true);
-
 			self.tools = {
 				setTime: function() {
 					return moment().format('L') + ' ' + moment().format('LTS');
@@ -28,23 +23,19 @@
 					self.modelAux ={descricao: null, titulo: null};
 					$('#collapseTarefa').collapse('hide');
                 },
-                addTarefa: function () {
+                saveTarefa: function () {
                     if(!self.tools.verificaTarefa()) return;
                     
-                    if(self.modelAux.index >= 0) {
+                    if(self.modelAux.id >= 0) {
                         var index = self.modelAux.index;
                         delete self.modelAux.index;
-                        self.modelTarefas.tarefas[index] = angular.copy(self.modelAux);
+                        self.tools.update(self.modelAux);
                     } else {
-                        self.modelTarefas.tarefas.push(angular.copy(self.modelAux));
                         self.tools.save(self.modelAux);
                     }
                 },
-                editTarefa: function (index) {
-                    if(!self.tools.verificaTarefa()) return;
-                    
-                    self.modelAux = angular.copy(self.modelTarefas.tarefas[index]); ;
-                    self.modelAux.index = index;
+                editTarefa: function (id) {                    
+                    self.tools.getTarefa(id);
                     $('#collapseTarefa').collapse('show');
                 },
                 verificaTarefa: function() {
@@ -59,29 +50,63 @@
                     }
                     return true;
                 },
+                alterarStatus: function(id, status) {
+                    var newStatus = status == 2 ? 1 : 2;
+                    var data = {id: id, status: newStatus};
+                    self.tools.update(data);
+                },
+                getTarefa: function(id){
+                    $http.get('http://localhost:9001/api/v1/task/'+id)
+                    .then(function successCallback(response) {
+                        self.modelAux = response.data;
+                        return;                      
+                    }, function errorCallback(response) {
+                        return;
+                    });
+                },
 				recuperaRegistros: function() {
                     $http.get('http://localhost:9001/api/v1/task')
                     .then(function successCallback(response) {
-                        console.log(response);
                         self.modelTarefas.tarefas = response.data;
 					    self.tools.clearTarefa();
                         return;                      
                     }, function errorCallback(response) {
-                        console.log(response);
                         return;
                     });
                 },
                 save: function(data){
                     $http.post('http://localhost:9001/api/v1/task', data)
                     .then(function successCallback(response) {                        
-                        console.log(response);
-                        self.modelTarefas.tarefas = response.data;
+                        self.tools.recuperaRegistros();
                         return;                      
                     }, function errorCallback(response) {
-                        console.log(response);
                         return;
                     });
-                }
+                },
+                update: function(data){
+                    $http.put('http://localhost:9001/api/v1/task/'+data.id, data)
+                    .then(function successCallback(response) {                        
+                        self.tools.recuperaRegistros();
+					    self.tools.clearTarefa();
+                        return;                      
+                    }, function errorCallback(response) {
+                        return;
+                    });
+                },
+                delete: function(id){
+                    $http.delete('http://localhost:9001/api/v1/task/'+id)
+                    .then(function successCallback(response) {
+                        self.tools.recuperaRegistros();                        
+                        return;                      
+                    }, function errorCallback(response) {
+                        return;
+                    });
+                },
+            };
+
+            self.formatDate = function(data) {
+                var dateTime = moment( data, "YYYY-MM-DD HH:mm:ss",true);;
+                return dateTime.isValid() ? dateTime.format('DD/MM/YYYY HH:mm:ss') : '--';
             };
             
             // Model to JSON for demo purpose

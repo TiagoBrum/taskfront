@@ -27,7 +27,7 @@
 					<div class="text-right">
 						<button class="btn btn-warning" type="button" ng-click="tools.clearTarefa()">
 							<i class="fa fa-ban"></i> Cancelar</button>
-						<button class="btn btn-success" type="button" ng-click="tools.addTarefa()">
+						<button class="btn btn-success" type="button" ng-click="tools.saveTarefa()">
 							<i class="fa fa-plus"></i> Adicionar</button>
 					</div>
 				</form>
@@ -57,13 +57,18 @@
 								<p>{{tarefa.descricao}}</p>
 							</div>
 							<div class="col-xs-2 text-right m-t-5">
-								  <button type="button" ng-click="tools.editTarefa($index)" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-								  <button type="button" ng-click="modelTarefas.tarefas.splice($index, 1)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+								<button type="button" ng-click="tools.alterarStatus(tarefa.id, tarefa.status)" class="btn " ng-class="{'btn-success': tarefa.status == 2, 'btn-info': tarefa.status == 1}">
+									<i ng-show="tarefa.status == 2" class="fa fa-check"></i>
+									<i ng-hide="tarefa.status == 2" class="fa fa-circle-o"></i>
+								</button>
+								<button type="button" ng-click="tools.editTarefa(tarefa.id)" class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+								<button type="button" ng-click="tools.delete(tarefa.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
 							</div>
 						  </div>
 						  <div class="row">
 							  <div class="col-xs-1"></div>
-							  <div class="col-md-4"><small>Data de criação: {{tarefa.data_criacao}}</small></div>
+							  <div class="col-md-3"><small>Data de criação: <span ng-bind="formatDate(tarefa.data_criacao)"></span></small></div>
+							  <div class="col-md-3"><small>Data de edição: <span ng-bind="formatDate(tarefa.data_edicao)"></span></small></div>
 						  </div>
 						</dnd-nodrag>
 					</li>
